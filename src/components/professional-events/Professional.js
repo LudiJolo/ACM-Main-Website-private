@@ -144,7 +144,6 @@ class Professional extends React.Component {
                   <Card
                     className="professional-card"
                     style={{ width: "24rem", padding: "10px", margin: "2em" }}
-                    onLoad
                   >
                     <center>
                       <img

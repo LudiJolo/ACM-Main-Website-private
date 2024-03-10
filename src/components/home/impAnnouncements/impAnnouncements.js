@@ -28,7 +28,7 @@ const ImpAnnouncements = () => {
         });
         setUpcoming(comingUpEvents);
 
-        const featuredEvents = collectionGroup(db, "featuredEvent");
+        const featuredEvents = collectionGroup(db, "featuredEvents");
         const queryFeaturedEvents = await getDocs(featuredEvents);
         const events = [];
         queryFeaturedEvents.forEach((doc) => {

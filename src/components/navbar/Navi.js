@@ -180,9 +180,7 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Join us for our club's Game Night extravaganza on Friday, March 1st!
-          It's a fantastic opportunity to earn prizes, connect with fellow members,
-          and indulge in some friendly competition.
+          Meet your future 2024-2025 ACM leaders this upcoming Election on March 19th, Tuesday at ET A332.
         </div>
       </>
     );
