@@ -29,7 +29,7 @@ const EventsAdmin = () => {
         const upcoming = collectionGroup(db, "upcomingEvents");
         const semester = collectionGroup(db, "semesterEvents");
         const past = collectionGroup(db, "pastEvents");
-        const featured = collectionGroup(db, "featuredEvent");
+        const featured = collectionGroup(db, "featuredEvents");
         const upcomingSnapshot = await getDocs(upcoming);
         const semSnapshot = await getDocs(semester);
         const pastSnapshot = await getDocs(past);
@@ -99,7 +99,7 @@ const EventsAdmin = () => {
       setUpcoming((prevArray) => [...prevArray, newEventObj]);
     } else if (activeTab === "semesterEvents") {
       setSemester((prevArray) => [...prevArray, newEventObj]);
-    } else if (activeTab === "featuredEvent") {
+    } else if (activeTab === "featuredEvents") {
       setFeatured((prevArray) => [...prevArray, newEventObj]);
     } else {
       setPast((prevArray) => [...prevArray, newEventObj]);
@@ -118,7 +118,7 @@ const EventsAdmin = () => {
       const updatedSemester = semester.filter((item) => item.id !== idToRemove);
 
       setSemester(updatedSemester);
-    } else if (activeTab === "featuredEvent") {
+    } else if (activeTab === "featuredEvents") {
       const updatedFeatured = featured.filter((item) => item.id !== idToRemove);
 
       setFeatured(updatedFeatured);
@@ -149,7 +149,7 @@ const EventsAdmin = () => {
       });
 
       setSemester(updatedSemester);
-    } else if (activeTab === "featuredEvent") {
+    } else if (activeTab === "featuredEvents") {
       const updatedFeatured = featured.map((obj) => {
         if (obj.id === idToEdit) {
           return { ...obj, altText: newName };
@@ -181,7 +181,7 @@ const EventsAdmin = () => {
     } else if (newTab === "semesterEvents") {
       setSemester((prevArray) => [...prevArray, newCopy]);
     }
-    else if (newTab === "featuredEvent") {
+    else if (newTab === "featuredEvents") {
       setFeatured((prevArray) => [...prevArray, newCopy]);
     }  else {
       setPast((prevArray) => [...prevArray, newCopy]);
@@ -196,7 +196,7 @@ const EventsAdmin = () => {
       const updatedSemester = semester.filter((item) => item.id !== oldCopyID);
 
       setSemester(updatedSemester);
-    }else if (activeTab === "featuredEvent") {
+    }else if (activeTab === "featuredEvents") {
       const updatedFeatured = featured.filter((item) => item.id !== oldCopyID);
 
       setSemester(updatedFeatured);
@@ -253,7 +253,7 @@ const EventsAdmin = () => {
             onMove={onMoveHandler}
           />
         </Tab>
-        <Tab eventKey="featuredEvent" title="Featured">
+        <Tab eventKey="featuredEvents" title="Featured">
           <EventSubTab
             data={featured}
             activeSection={activeTab}
