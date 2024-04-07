@@ -180,7 +180,7 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Meet your future 2024-2025 ACM leaders this upcoming Election on March 19th, Tuesday at ET A332.
+          Congratulations election winners: Brian C. (President), Carlo N. (V-President), Mark R. (Secretary), Jae K. (Treasurer), Joshua S. (Project Manager), Weston W. (Webmaster)
         </div>
       </>
     );
