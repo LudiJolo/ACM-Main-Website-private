@@ -648,7 +648,7 @@ const BoardAdmin = () => {
   };
 
   return (
-    <div class="container main-boardadmin">
+    <div class="container main-boardadmin mt-5 pt-5">
       {currentBoard && imgArray && (
         <>
           <h1 align="center">Board page</h1>

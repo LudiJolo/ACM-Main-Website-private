@@ -208,7 +208,7 @@ const EventsAdmin = () => {
   };
 
   return (
-    <div class="container main-event">
+    <div class="container main-event mt-5 pt-5">
       <h1 align="center">Events page</h1>
 
       <Button className="mx-auto mb-3" onClick={() => setAddModal(true)}>

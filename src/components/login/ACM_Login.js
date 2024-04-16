@@ -15,9 +15,9 @@ const ACM_Login = () => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) =>  {
-            //sighned in
+            //signed in
             console.log('Loging Successfully');
-            history.push("./admin");
+            history.push("./auth");
         })
         .catch((error) => {
             alert("Wrong credentials")

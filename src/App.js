@@ -29,6 +29,7 @@ import { Navbar } from "react-bootstrap";
 import ProjectsAdmin from "./components/admin/projectsAdmin/ProjectsAdmin";
 import BoardAdmin from "./components/admin/boardAdmin/BoardAdmin";
 import EventsAdmin from "./components/admin/eventsAdmin/EventsAdmin";
+import Authenticate from "./components/login/Authenticate";
 
 class App extends React.Component {
   constructor(props) {
@@ -68,15 +69,6 @@ class App extends React.Component {
   render() {
     const SuccessPage = () => <Route path="/Success" component={Success} />;
 
-    const AdminContainer = () => (
-      <>
-        <Route exact path="/ACM_admin" component={Admin} />
-        <Route path="/login" component={ACM_Login} />
-        <Route path="/ACM_admin/projects" component={ProjectsAdmin} />
-        <Route path="/ACM_admin/events" component={EventsAdmin} />
-        <Route path="/ACM_admin/board" component={BoardAdmin} />
-      </>
-    );
     const DefaultContainer = () => (
       <>
         <Navi />
@@ -113,9 +105,10 @@ class App extends React.Component {
           <Switch>
             <Route
               exact
-              path={["/login", "/ACM_admin*"]}
-              component={AdminContainer}
+              path={"/auth*"}
+              component={Authenticate}
             />
+            <Route exact path={"/login"} component={ACM_Login}/>
             <Route component={DefaultContainer} />
           </Switch>
         </BrowserRouter>
