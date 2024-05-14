@@ -24,6 +24,7 @@ import {
   doc,
   getDoc,
   arrayUnion,
+  addDoc,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -35,6 +36,81 @@ import {
 import { db } from "../../professional-events/firebaseConfig";
 import CurrentTab from "./CurrentTab";
 import ArchiveTab from "./ArchiveTab";
+
+const currentDate = new Date();
+const thisYear = currentDate.getFullYear();
+const nextYear = currentDate.getFullYear() + 1;
+
+const newBoardObject = {
+  leaders: {
+    board: {
+      president: {
+        first: "Vacant",
+        last: "Position",
+        position: "President",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      vicepresident: {
+        first: "Vacant",
+        last: "Position",
+        position: "Vice President",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      secretary: {
+        first: "Vacant",
+        last: "Position",
+        position: "Secretary",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      treasurer: {
+        first: "Vacant",
+        last: "Position",
+        position: "Treasurer",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      vp_affairs1: {
+        first: "Vacant",
+        last: "Position",
+        position: "VP of Internal Affairs",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      vp_affairs2: {
+        first: "Vacant",
+        last: "Position",
+        position: "VP of External Affairs",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      webmaster: {
+        first: "Vacant",
+        last: "Position",
+        position: "Web Master",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+      proj_manager1: {
+        first: "Vacant",
+        last: "Position",
+        position: "Project Manager",
+        img: "https://firebasestorage.googleapis.com/v0/b/acm-calstatela.appspot.com/o/Leaders%202023-2024%2Facm_logo.png?alt=media&token=b94461a7-2c6c-4976-ba13-588cfefca699",
+      },
+    },
+    committee: {
+      Web:[],
+      Projects:[],
+      Innovation:[],
+      Design:[],
+    },
+    officers: {
+      Executive:[],
+      Finance:[],
+      Project:[],
+      Web:[],
+    },
+    advisors: [],
+  },
+  schoolyear: `${thisYear}-${nextYear}`,
+  year: new Date(),
+};
+
 const BoardAdmin = () => {
   const [currentBoard, setCurrent] = useState(null);
   const [imgArray, setImgLinks] = useState([]);
@@ -60,7 +136,7 @@ const BoardAdmin = () => {
           const latestBoard = boardList.at(boardList.length - 1);
           setCurrent(latestBoard);
 
-          let imgArray=[];
+          let imgArray = [];
           const storageObj = getStorage();
           const imgsRef = ref(
             storageObj,
@@ -74,7 +150,7 @@ const BoardAdmin = () => {
             .then(async (res) => {
               const downloadPromises = res.items.map(async (itemRef) => {
                 const downloadURL = await getDownloadURL(itemRef);
-                imgArray.push({link:downloadURL, name:itemRef.name});
+                imgArray.push({ link: downloadURL, name: itemRef.name });
               });
 
               setImgLinks(imgArray);
@@ -647,13 +723,25 @@ const BoardAdmin = () => {
     }
   };
 
+  const newBoardHandler = async () => {
+    const boardCollection = collection(db,"acm_board");
+    try {
+      const docRef = await addDoc(boardCollection, newBoardObject);
+    } catch (error) {
+      console.error("Error adding new empty board", error);
+    }
+    setCurrent(newBoardObject);
+  };
+
   return (
     <div class="container main-boardadmin mt-5 pt-5">
       {currentBoard && imgArray && (
         <>
           <h1 align="center">Board page</h1>
 
-          <Button className="mr-3 mb-3">Add new empty board</Button>
+          <Button className="mr-3 mb-3" onClick={newBoardHandler}>
+            Add new empty board
+          </Button>
           <Tabs id="sub-tabs" className="mb-3 event-tabs">
             <Tab eventKey="current" title="Current">
               <CurrentTab
